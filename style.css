@@ -6,24 +6,22 @@
 
 :root {
     --text-color: rgb(21, 22, 22);
-    --bg-url: url(assets/bg-blue-sky.jpg);
+    --bg-url: url(./assets/bg-blue-sky.jpg);
     --stroke-color: rgba(255, 255, 255, 0.5);
-    --stroke-color-hover: rgba(255, 255, 255, 0.5);
     --surface-color: rgba(255, 255, 255, 0.05);
-    --surface-color-hover: rgba(255, 255, 255, 0.02);
+    --surface-color-hover: rgba(134, 211, 246, 0.346);
     --highlight-color: rgba(255, 255, 255, 0.2);
-    --switch-bg-url: url(assets/moon-stars.svg) 
+    --switch-bg-url: url(./assets/moon-stars.svg) 
 }
 
 .Light {
     --text-color: rgb(232, 243, 191);
-    --bg-url: url(assets/bg-dark-sky.jpg);
-    --stroke-color: rgba(0, 0, 0, 0.5);
-    --stroke-color-hover: rgba(255, 255, 255, 0.5);
-    --surface-color: rgba(0, 0, 0, 0.05);
-    --surface-color-hover: rgba(0, 0, 0, 0.02);
-    --highlight-color: rgba(0, 0, 0, 0.1);
-    --switch-bg-url: url(assets/sun.svg) 
+    --bg-url: url(./assets/bg-dark-sky.jpg);
+    --stroke-color: rgba(85, 77, 47, 0.5);
+    --surface-color: rgba(239, 125, 125, 0.05);
+    --surface-color-hover: rgba(202, 34, 34, 0.217);
+    --highlight-color: rgba(173, 129, 240, 0.307);
+    --switch-bg-url: url(./assets/sun.svg)
 }
 
 
@@ -31,6 +29,7 @@
 body {
     background: var(--bg-url) no-repeat top center/cover;
     height: 100vh;
+    backdrop-filter: blur(15px);
 }
 
 body * {
@@ -65,6 +64,48 @@ body * {
     margin-top: 8px;
 }
 
+/* Button */
+
+#SwitchButton {
+    position: relative;
+    width: 64px;
+    margin: 4px auto;
+}
+
+#SwitchButton button {
+    width: 32px;
+    height: 32px;
+    background: white var(--switch-bg-url) no-repeat center;
+    border: 0;
+    border-radius: 50%;
+
+    position: absolute;
+    top: 50%;
+    left: 0;
+    z-index: 1;
+    transform: translateY(-50%);
+
+    animation: slide-back 0.2s;
+}
+
+.Light #SwitchButton button {
+    animation: slide-in 0.2s forwards;
+}
+
+#SwitchButton button:hover {
+    outline: 8px solid var(--highlight-color);
+}
+
+#SwitchButton span {
+    display: block;
+    width: 64px;
+    height: 24px;
+    background: var(--surface-color);
+    border: 1px solid var(--stroke-color);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 9999px;
+}
+
 /* Listas */
 
 ul {
@@ -92,15 +133,13 @@ ul li a {
     transition: background 0.2s;
 }
 
-ul li a:hover{
-    background: var(--stroke-color-hover);
+ul li a:hover {
+    background: var(--surface-color-hover);
     border: 1.5px solid var(--text-color);
 
 }
 
-SwitchButton {
-    align-items: center;
-}
+
 
 /* Redes Sociais */
 
@@ -134,3 +173,34 @@ footer {
 }
 
 
+/* Media e Queries */
+
+
+@media (min-width: 700px) {
+    :root {
+        --bg-url: url(./assets/bg-blue-sky.jpg)
+        }
+    .Light {
+        --bg-url: url(./assets/bg-dark-sky.jpg)
+    }    
+}
+
+/* Animation */
+@keyframes slide-in {
+    from {
+        left: 0;
+    }
+    to {
+        left: 50%;
+    }
+
+}
+
+@keyframes slide-back {
+    from {
+        left: 50%;
+    }
+    to {
+        left: 0;
+    }
+}
